@@ -175,11 +175,7 @@ public class HomePage extends javax.swing.JFrame {
         lblManageBooksTxt.setForeground(new java.awt.Color(153, 153, 153));
         lblManageBooksTxt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Book_26px.png"))); // NOI18N
         lblManageBooksTxt.setText("    Manage Books");
-        lblManageBooksTxt.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                lblManageBooksTxtFocusGained(evt);
-            }
-        });
+
         lblManageBooksTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblManageBooksTxtMouseClicked(evt);
