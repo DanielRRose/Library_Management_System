@@ -68,10 +68,11 @@ public class ManageBooks extends javax.swing.JFrame {
     // add new book to TABLE library_ms.book_details
     public void addBookToTable() {
 
-        // TODO impement condition when txtFieldBookId is empty. Let TABLE auto_increment book_id
+        // TODO impement condition when txtFieldBookId is empty. Let TABLE
+        // auto_increment book_id
 
         if (validateBookFields()) {
-            if (!recordExists()) {
+            if (recordExists() == false) {
 
                 try {
                     Connection conn = DBConnection.getConnection();
@@ -94,7 +95,6 @@ public class ManageBooks extends javax.swing.JFrame {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                JOptionPane.showMessageDialog(rootPane, "Success");
             } else {
                 JOptionPane.showMessageDialog(rootPane, "This Book Already Exists!");
             }
@@ -140,18 +140,19 @@ public class ManageBooks extends javax.swing.JFrame {
         }
     }
 
-
     // delete book from TABLE library_ms.book_details
     public void deleteBookInTable() {
 
-        if (recordExists()){
+        if (recordExists()) {
             try {
                 Connection conn = DBConnection.getConnection();
-                String sqlDelete = String.format("DELETE FROM library_ms.book_details WHERE book_id = %d", txtFieldBookId);
+                String sqlDelete = String.format("DELETE FROM library_ms.book_details WHERE book_id = %d",
+                        Integer.parseInt(txtFieldBookId.getText()));
                 PreparedStatement prepStatement = conn.prepareStatement(sqlDelete);
                 int updatedRowCount = prepStatement.executeUpdate();
 
                 if (updatedRowCount > 0) {
+                    setBookDetailsToTable();
                     JOptionPane.showMessageDialog(this, "Book Successfully Deleted");
                 }
             } catch (Exception e) {
@@ -164,7 +165,8 @@ public class ManageBooks extends javax.swing.JFrame {
 
     // checks if book exists in TABLE library_ms.book_details using book_id
     public boolean recordExists() {
-        boolean recordFound = false;
+
+        System.out.println("Attempting to Locate Record");
 
         try {
             int bookId = Integer.parseInt(txtFieldBookId.getText());
@@ -177,12 +179,17 @@ public class ManageBooks extends javax.swing.JFrame {
 
             if (rs.next()) {
                 System.out.println("Record exists!");
-                recordFound = true;
+                String columnValue = rs.getString(1);
+                System.out.println("column value at 1 = " + columnValue);
+                // System.out.printf("book_id = %d, book_name = %s%n", rs.get, rs.getString("book_name"));
+                return true;
+            } else {
+                 return false;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return recordFound;
+        return false;
 
     }
 
@@ -219,7 +226,7 @@ public class ManageBooks extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         JPnlControls = new javax.swing.JPanel();
@@ -239,7 +246,7 @@ public class ManageBooks extends javax.swing.JFrame {
         txtFieldQuantity = new javax.swing.JTextField();
         btnDelete = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
-        btnAdd = new javax.swing.JButton();
+        btnAdd2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         rSTableBookDetails = new rojerusan.RSTableMetro();
@@ -270,23 +277,23 @@ public class ManageBooks extends javax.swing.JFrame {
         javax.swing.GroupLayout JPnlBackLayout = new javax.swing.GroupLayout(JPnlBack);
         JPnlBack.setLayout(JPnlBackLayout);
         JPnlBackLayout.setHorizontalGroup(
-                JPnlBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(JPnlBackLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblBack, javax.swing.GroupLayout.PREFERRED_SIZE, 110,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            JPnlBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPnlBackLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblBack, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
         JPnlBackLayout.setVerticalGroup(
-                JPnlBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(JPnlBackLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblBack)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            JPnlBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPnlBackLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblBack)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         JPnlControls.add(JPnlBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 60));
 
-        lblAcountIcon
-                .setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Contact_26px.png"))); // NOI18N
+        lblAcountIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Contact_26px.png"))); // NOI18N
         JPnlControls.add(lblAcountIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
         txtFieldBookId.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -309,8 +316,7 @@ public class ManageBooks extends javax.swing.JFrame {
         lblBookNameTxt.setText("Enter Book Name");
         JPnlControls.add(lblBookNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 170, -1));
 
-        lblAcountIcon1.setIcon(
-                new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Moleskine_26px.png"))); // NOI18N
+        lblAcountIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Moleskine_26px.png"))); // NOI18N
         JPnlControls.add(lblAcountIcon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         txtFieldBookName.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -329,8 +335,7 @@ public class ManageBooks extends javax.swing.JFrame {
         lblAuthorNameTxt.setText("Enter Author Name");
         JPnlControls.add(lblAuthorNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 170, -1));
 
-        lblAcountIcon2.setIcon(new javax.swing.ImageIcon(
-                getClass().getResource("/AddNewBookIcons/icons8_Collaborator_Male_26px.png"))); // NOI18N
+        lblAcountIcon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Collaborator_Male_26px.png"))); // NOI18N
         JPnlControls.add(lblAcountIcon2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
         txtFieldAuthorName.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -349,8 +354,7 @@ public class ManageBooks extends javax.swing.JFrame {
         lblQuantityTxt.setText("Enter Quantity");
         JPnlControls.add(lblQuantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 170, -1));
 
-        lblAcountIcon3
-                .setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Unit_26px.png"))); // NOI18N
+        lblAcountIcon3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Unit_26px.png"))); // NOI18N
         JPnlControls.add(lblAcountIcon3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, -1, -1));
 
         txtFieldQuantity.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -387,16 +391,16 @@ public class ManageBooks extends javax.swing.JFrame {
         });
         JPnlControls.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, 90, -1));
 
-        btnAdd.setBackground(new java.awt.Color(0, 153, 0));
-        btnAdd.setFont(new java.awt.Font("Liberation Sans", 1, 17)); // NOI18N
-        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
-        btnAdd.setText("Add");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd2.setBackground(new java.awt.Color(0, 153, 0));
+        btnAdd2.setFont(new java.awt.Font("Liberation Sans", 1, 17)); // NOI18N
+        btnAdd2.setForeground(new java.awt.Color(255, 255, 255));
+        btnAdd2.setText("Add");
+        btnAdd2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                btnAdd2ActionPerformed(evt);
             }
         });
-        JPnlControls.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 90, -1));
+        JPnlControls.add(btnAdd2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 90, -1));
 
         getContentPane().add(JPnlControls, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 830));
 
@@ -404,18 +408,19 @@ public class ManageBooks extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         rSTableBookDetails.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
+            new Object [][] {
 
-                },
-                new String[] {
-                        "book_id", "book_name", "author", "quantity"
-                }) {
-            Class[] types = new Class[] {
-                    java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            },
+            new String [] {
+                "book_id", "book_name", "author", "quantity"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
+                return types [columnIndex];
             }
         });
         rSTableBookDetails.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -533,7 +538,7 @@ public class ManageBooks extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPnlBack;
     private javax.swing.JPanel JPnlControls;
-    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnAdd2;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel1;
