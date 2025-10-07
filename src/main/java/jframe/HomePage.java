@@ -239,6 +239,9 @@ public class HomePage extends javax.swing.JFrame {
         lblIssueBookTxt1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Return_Purchase_26px.png"))); // NOI18N
         lblIssueBookTxt1.setText("    Issue Book");
         lblIssueBookTxt1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblIssueBookTxt1MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblIssueBookTxt1MouseEntered(evt);
             }
@@ -566,6 +569,12 @@ public class HomePage extends javax.swing.JFrame {
         manageStudents.setVisible(true);
         dispose();
     }//GEN-LAST:event_lblDashboard3MouseClicked
+
+    private void lblIssueBookTxt1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIssueBookTxt1MouseClicked
+        IssueBook issueBook = new IssueBook();
+        issueBook.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_lblIssueBookTxt1MouseClicked
 
     
         private void lblManageBooksTxtMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lblManageBooksTxtMouseClicked

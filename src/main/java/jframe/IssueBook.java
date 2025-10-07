@@ -296,7 +296,9 @@ public class IssueBook extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblBack1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBack1MouseClicked
-        // TODO add your handling code here:
+        HomePage homePage = new HomePage();
+        homePage.setVisible(true);
+        dispose();
     }//GEN-LAST:event_lblBack1MouseClicked
 
     private void txtFldStudentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFldStudentIdActionPerformed
