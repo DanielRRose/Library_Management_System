@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author daniel
@@ -23,27 +25,51 @@ public class IssueBook extends javax.swing.JFrame {
         initComponents();
     }
 
-    // fetches the book details from ms_libray.book_details and populates book detail section
+    // fetches the book details from ms_libray.book_details and populates book detail section 
     public void getBookDetails() {
 
         try {
-            int bookId = Integer.parseInt(txtFldStudentId.getText());
+            int bookId = Integer.parseInt(txtFldBookId.getText());
 
             Connection conn = DBConnection.getConnection();
-            String sqlQuery = "SELECT * (SELECT 1 FROM library_ms.book_details WHERE book_id = %d)"
+            String sqlQuery = "SELECT * FROM library_ms.book_details WHERE book_id = %d"
             .formatted(bookId);
             PreparedStatement prepStatement = conn.prepareStatement(sqlQuery);
             ResultSet rs = prepStatement.executeQuery();
 
             while (rs.next()) {
                 int id = rs.getInt(1);
-                lblBookIdDisplay.setText(Integer.toString(bookId));
+                lblBookIdDisplay.setText(Integer.toString(id));
                 lblBookNameDisplay.setText(rs.getString(2));
                 lblAuthorDisplay.setText(rs.getString(3));
                 lblQuantityDisplay.setText(rs.getString(4));
             }
         } catch (Exception e) {
            e.printStackTrace();
+        }
+    }
+
+    public void getStudentDetails() {
+
+        try {
+            int studentId = Integer.parseInt(txtFldStudentId.getText());
+
+            Connection conn = DBConnection.getConnection();
+            String sqlQuery = "SELECT * FROM library_ms.student_details WHERE id = %d"
+            .formatted(studentId);
+            PreparedStatement prepStatement = conn.prepareStatement(sqlQuery);
+            ResultSet rs = prepStatement.executeQuery();
+
+            while(rs.next()) {
+                int id = rs.getInt(1);
+                int age = rs.getInt(3);
+                lblStudentIdDisplay.setText(Integer.toString(id));
+                lblStudentNameDisplay.setText(rs.getString(2));
+                lblStudentAgeDisplay.setText(Integer.toString(age));
+                lblStudentGenderDisplay.setText(rs.getString(4));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -98,7 +124,7 @@ public class IssueBook extends javax.swing.JFrame {
         panel_Main.setBackground(new java.awt.Color(255, 255, 255));
         panel_Main.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelBookDetails.setBackground(new java.awt.Color(255, 51, 51));
+        panelBookDetails.setBackground(new java.awt.Color(0, 153, 153));
         panelBookDetails.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         JPnlBack1.setBackground(new java.awt.Color(102, 102, 255));
@@ -249,6 +275,11 @@ public class IssueBook extends javax.swing.JFrame {
         txtFldStudentId.setBackground(new java.awt.Color(204, 204, 204));
         txtFldStudentId.setForeground(new java.awt.Color(0, 0, 0));
         txtFldStudentId.setBorder(new javax.swing.border.MatteBorder(null));
+        txtFldStudentId.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtFldStudentIdFocusLost(evt);
+            }
+        });
         txtFldStudentId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFldStudentIdActionPerformed(evt);
@@ -284,6 +315,11 @@ public class IssueBook extends javax.swing.JFrame {
         txtFldBookId.setBackground(new java.awt.Color(204, 204, 204));
         txtFldBookId.setForeground(new java.awt.Color(0, 0, 0));
         txtFldBookId.setBorder(new javax.swing.border.MatteBorder(null));
+        txtFldBookId.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtFldBookIdFocusLost(evt);
+            }
+        });
         txtFldBookId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFldBookIdActionPerformed(evt);
@@ -348,6 +384,22 @@ public class IssueBook extends javax.swing.JFrame {
     private void btbIssueBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbIssueBookActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btbIssueBookActionPerformed
+
+    private void txtFldStudentIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFldStudentIdFocusLost
+        if (txtFldStudentId.getText() != "" && txtFldStudentId.getText().matches("^[0-9]+$")) {
+            getStudentDetails();
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid Student Id");
+        }
+    }//GEN-LAST:event_txtFldStudentIdFocusLost
+
+    private void txtFldBookIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFldBookIdFocusLost
+        if (txtFldBookId.getText() != "" && txtFldBookId.getText().matches("^[0-9]+$")) {
+            getBookDetails();
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid Book Id");
+        }
+    }//GEN-LAST:event_txtFldBookIdFocusLost
 
     /**
      * @param args the command line arguments

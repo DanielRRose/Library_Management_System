@@ -130,7 +130,7 @@ public class HomePage extends javax.swing.JFrame {
         JPnlSideBar.setBackground(new java.awt.Color(51, 51, 51));
         JPnlSideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        JPnlHomePage.setBackground(new java.awt.Color(255, 51, 51));
+        JPnlHomePage.setBackground(new java.awt.Color(0, 153, 153));
         JPnlHomePage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
@@ -327,7 +327,7 @@ public class HomePage extends javax.swing.JFrame {
         JPnlDetailSection.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         JPnlNoStudents.setBackground(new java.awt.Color(204, 204, 204));
-        JPnlNoStudents.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(255, 51, 51)));
+        JPnlNoStudents.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(0, 153, 153)));
 
         lblNoStudetntsNum.setBackground(new java.awt.Color(102, 102, 102));
         lblNoStudetntsNum.setFont(new java.awt.Font("Liberation Sans", 1, 50)); // NOI18N
@@ -398,7 +398,7 @@ public class HomePage extends javax.swing.JFrame {
         JPnlDetailSection.add(lblIssuedBooksTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, -1, -1));
 
         JPnlIssuedBooks.setBackground(new java.awt.Color(204, 204, 204));
-        JPnlIssuedBooks.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(255, 51, 51)));
+        JPnlIssuedBooks.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(0, 153, 153)));
 
         lblIssuedBooksNum.setBackground(new java.awt.Color(102, 102, 102));
         lblIssuedBooksNum.setFont(new java.awt.Font("Liberation Sans", 1, 50)); // NOI18N
