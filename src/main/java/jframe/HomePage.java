@@ -175,7 +175,6 @@ public class HomePage extends javax.swing.JFrame {
         lblManageBooksTxt.setForeground(new java.awt.Color(153, 153, 153));
         lblManageBooksTxt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Book_26px.png"))); // NOI18N
         lblManageBooksTxt.setText("    Manage Books");
-
         lblManageBooksTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblManageBooksTxtMouseClicked(evt);
@@ -199,6 +198,9 @@ public class HomePage extends javax.swing.JFrame {
         lblDashboard3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Read_Online_26px.png"))); // NOI18N
         lblDashboard3.setText("    Manage Students");
         lblDashboard3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblDashboard3MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblDashboard3MouseEntered(evt);
             }
@@ -558,6 +560,10 @@ public class HomePage extends javax.swing.JFrame {
     private void lblDefaultListTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDefaultListTxtMouseExited
         JPnlDefaultList.setBackground(mouseExitColor);
     }//GEN-LAST:event_lblDefaultListTxtMouseExited
+
+    private void lblDashboard3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDashboard3MouseClicked
+        ManageStudents manageStudents = new ManageStudents();
+    }//GEN-LAST:event_lblDashboard3MouseClicked
 
     
         private void lblManageBooksTxtMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lblManageBooksTxtMouseClicked

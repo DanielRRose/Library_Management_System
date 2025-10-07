@@ -395,7 +395,11 @@ public class ManageBooks extends javax.swing.JFrame {
         btnAdd2.setFont(new java.awt.Font("Liberation Sans", 1, 17)); // NOI18N
         btnAdd2.setForeground(new java.awt.Color(255, 255, 255));
         btnAdd2.setText("Add");
-
+        btnAdd2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdd2ActionPerformed(evt);
+            }
+        });
         JPnlControls.add(btnAdd2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 90, -1));
 
         getContentPane().add(JPnlControls, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 830));
