@@ -4,6 +4,10 @@
  */
 package jframe;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /**
  *
  * @author daniel
@@ -17,6 +21,30 @@ public class IssueBook extends javax.swing.JFrame {
      */
     public IssueBook() {
         initComponents();
+    }
+
+    // fetches the book details from ms_libray.book_details and populates book detail section
+    public void getBookDetails() {
+
+        try {
+            int bookId = Integer.parseInt(txtFldStudentId.getText());
+
+            Connection conn = DBConnection.getConnection();
+            String sqlQuery = "SELECT * (SELECT 1 FROM library_ms.book_details WHERE book_id = %d)"
+            .formatted(bookId);
+            PreparedStatement prepStatement = conn.prepareStatement(sqlQuery);
+            ResultSet rs = prepStatement.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                lblBookIdDisplay.setText(Integer.toString(bookId));
+                lblBookNameDisplay.setText(rs.getString(2));
+                lblAuthorDisplay.setText(rs.getString(3));
+                lblQuantityDisplay.setText(rs.getString(4));
+            }
+        } catch (Exception e) {
+           e.printStackTrace();
+        }
     }
 
     /**
