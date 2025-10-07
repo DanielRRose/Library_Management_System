@@ -397,7 +397,7 @@ public class ManageBooks extends javax.swing.JFrame {
         btnAdd2.setText("Add");
         btnAdd2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                btnAdd2ActionPerformed(evt);
             }
         });
         JPnlControls.add(btnAdd2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 90, -1));

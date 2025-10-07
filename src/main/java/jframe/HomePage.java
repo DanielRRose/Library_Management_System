@@ -563,6 +563,8 @@ public class HomePage extends javax.swing.JFrame {
 
     private void lblDashboard3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDashboard3MouseClicked
         ManageStudents manageStudents = new ManageStudents();
+        manageStudents.setVisible(true);
+        dispose();
     }//GEN-LAST:event_lblDashboard3MouseClicked
 
     
