@@ -262,7 +262,7 @@ public class ManageBooks extends javax.swing.JFrame {
         JPnlControls.setBackground(new java.awt.Color(102, 102, 255));
         JPnlControls.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        JPnlBack.setBackground(new java.awt.Color(255, 51, 51));
+        JPnlBack.setBackground(new java.awt.Color(0, 153, 153));
 
         lblBack.setFont(new java.awt.Font("Liberation Sans", 1, 17)); // NOI18N
         lblBack.setForeground(new java.awt.Color(255, 255, 255));
@@ -433,10 +433,10 @@ public class ManageBooks extends javax.swing.JFrame {
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 580, 130));
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 51, 0));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Books_52px_1.png"))); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/books-stack-of-three.png"))); // NOI18N
         jLabel1.setText("Manage Books");
-        jLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 5, 0, new java.awt.Color(255, 51, 0)));
+        jLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 5, 0, new java.awt.Color(0, 0, 0)));
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 240, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 1190, 830));

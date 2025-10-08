@@ -236,7 +236,7 @@ public class ManageStudents extends javax.swing.JFrame {
         lblAcountIcon3 = new javax.swing.JLabel();
         btnDelete = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
-        btnAdd2 = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
         cmbBoxGender = new javax.swing.JComboBox<>();
         txtFieldAge = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
@@ -253,7 +253,7 @@ public class ManageStudents extends javax.swing.JFrame {
         JPnlControls.setBackground(new java.awt.Color(102, 102, 255));
         JPnlControls.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        JPnlBack.setBackground(new java.awt.Color(255, 51, 51));
+        JPnlBack.setBackground(new java.awt.Color(0, 153, 153));
 
         lblBack.setFont(new java.awt.Font("Liberation Sans", 1, 17)); // NOI18N
         lblBack.setForeground(new java.awt.Color(255, 255, 255));
@@ -286,7 +286,6 @@ public class ManageStudents extends javax.swing.JFrame {
 
         lblAcountIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Contact_26px.png"))); // NOI18N
         JPnlControls.add(lblAcountIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
-        
         JPnlControls.add(txtFieldStudentId, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 260, 30));
 
         lblStudentIdTxt.setForeground(new java.awt.Color(255, 255, 255));
@@ -299,7 +298,6 @@ public class ManageStudents extends javax.swing.JFrame {
 
         lblAcountIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Moleskine_26px.png"))); // NOI18N
         JPnlControls.add(lblAcountIcon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
-
         JPnlControls.add(txtFieldStudentName, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 260, 30));
 
         lblAgeTxt.setForeground(new java.awt.Color(255, 255, 255));
@@ -338,16 +336,16 @@ public class ManageStudents extends javax.swing.JFrame {
         });
         JPnlControls.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, 90, -1));
 
-        btnAdd2.setBackground(new java.awt.Color(0, 153, 0));
-        btnAdd2.setFont(new java.awt.Font("Liberation Sans", 1, 17)); // NOI18N
-        btnAdd2.setForeground(new java.awt.Color(255, 255, 255));
-        btnAdd2.setText("Add");
-        btnAdd2.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setBackground(new java.awt.Color(0, 153, 0));
+        btnAdd.setFont(new java.awt.Font("Liberation Sans", 1, 17)); // NOI18N
+        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
-        JPnlControls.add(btnAdd2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 90, -1));
+        JPnlControls.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 90, -1));
 
         cmbBoxGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "male", "female" }));
         JPnlControls.add(cmbBoxGender, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 374, 260, 30));
@@ -374,16 +372,15 @@ public class ManageStudents extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-
         jScrollPane1.setViewportView(rSTableStudentDetails);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 760, 130));
 
         JLblManageStudents.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        JLblManageStudents.setForeground(new java.awt.Color(255, 51, 0));
-        JLblManageStudents.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Student_Male_52px.png"))); // NOI18N
+        JLblManageStudents.setForeground(new java.awt.Color(0, 0, 0));
+        JLblManageStudents.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/man_reading.png"))); // NOI18N
         JLblManageStudents.setText("Manage Students");
-        JLblManageStudents.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 5, 0, new java.awt.Color(255, 51, 0)));
+        JLblManageStudents.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 5, 0, new java.awt.Color(0, 0, 0)));
         jPanel2.add(JLblManageStudents, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 390, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 1190, 830));
@@ -486,7 +483,7 @@ public class ManageStudents extends javax.swing.JFrame {
     private javax.swing.JLabel JLblManageStudents;
     private javax.swing.JPanel JPnlBack;
     private javax.swing.JPanel JPnlControls;
-    private javax.swing.JButton btnAdd2;
+    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cmbBoxGender;

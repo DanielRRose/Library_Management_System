@@ -261,10 +261,10 @@ public class IssueBook extends javax.swing.JFrame {
         panel_Main.add(panelStudentDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, 500, 865));
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 25)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Books_52px_1.png"))); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/books-stack-of-three.png"))); // NOI18N
         jLabel1.setText("    Issue Book");
-        jLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 5, 0, new java.awt.Color(255, 51, 51)));
+        jLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 5, 0, new java.awt.Color(0, 0, 0)));
         panel_Main.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 60, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 20)); // NOI18N
