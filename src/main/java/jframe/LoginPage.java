@@ -164,11 +164,11 @@ public class LoginPage extends javax.swing.JFrame {
 
         lblAdvanceLibrary.setFont(new java.awt.Font("Liberation Sans", 0, 45)); // NOI18N
         lblAdvanceLibrary.setForeground(new java.awt.Color(102, 102, 255));
-        lblAdvanceLibrary.setText("Advance Library");
-        jPanel1.add(lblAdvanceLibrary, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 450, -1));
+        lblAdvanceLibrary.setText("School Library Manager");
+        jPanel1.add(lblAdvanceLibrary, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 490, -1));
 
-        lblLibraryImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/signup-library-icon.png"))); // NOI18N
-        jPanel1.add(lblLibraryImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 780, 580));
+        lblLibraryImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/stackedBooks.png"))); // NOI18N
+        jPanel1.add(lblLibraryImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 780, 580));
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
