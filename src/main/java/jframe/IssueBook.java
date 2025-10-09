@@ -4,6 +4,7 @@
  */
 package jframe;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -195,7 +196,7 @@ public class IssueBook extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         panel_Main = new javax.swing.JPanel();
@@ -233,6 +234,8 @@ public class IssueBook extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btbIssueBook = new javax.swing.JButton();
+        lblValideIdStatus = new javax.swing.JLabel();
+        lblValBkStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -259,28 +262,27 @@ public class IssueBook extends javax.swing.JFrame {
         javax.swing.GroupLayout JPnlBack1Layout = new javax.swing.GroupLayout(JPnlBack1);
         JPnlBack1.setLayout(JPnlBack1Layout);
         JPnlBack1Layout.setHorizontalGroup(
-                JPnlBack1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(JPnlBack1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblBack1, javax.swing.GroupLayout.PREFERRED_SIZE, 110,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            JPnlBack1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPnlBack1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblBack1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
         JPnlBack1Layout.setVerticalGroup(
-                JPnlBack1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(JPnlBack1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblBack1)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            JPnlBack1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPnlBack1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblBack1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         panelBookDetails.add(JPnlBack1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 60));
 
         pnlBookDetails1.setFont(new java.awt.Font("Liberation Sans", 1, 25)); // NOI18N
         pnlBookDetails1.setForeground(new java.awt.Color(255, 255, 255));
-        pnlBookDetails1.setIcon(
-                new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Literature_100px_1.png"))); // NOI18N
+        pnlBookDetails1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Literature_100px_1.png"))); // NOI18N
         pnlBookDetails1.setText("    Book Details");
-        pnlBookDetails1
-                .setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 5, 0, new java.awt.Color(255, 255, 255)));
+        pnlBookDetails1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 5, 0, new java.awt.Color(255, 255, 255)));
         panelBookDetails.add(pnlBookDetails1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 350, -1));
 
         lblBookId1.setFont(new java.awt.Font("Liberation Sans", 0, 25)); // NOI18N
@@ -305,26 +307,22 @@ public class IssueBook extends javax.swing.JFrame {
 
         lblBookNameDisplay.setFont(new java.awt.Font("Liberation Sans", 0, 20)); // NOI18N
         lblBookNameDisplay.setForeground(new java.awt.Color(0, 0, 0));
-        lblBookNameDisplay
-                .setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        lblBookNameDisplay.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         panelBookDetails.add(lblBookNameDisplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 140, 30));
 
         lblAuthorDisplay.setFont(new java.awt.Font("Liberation Sans", 0, 20)); // NOI18N
         lblAuthorDisplay.setForeground(new java.awt.Color(0, 0, 0));
-        lblAuthorDisplay
-                .setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        lblAuthorDisplay.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         panelBookDetails.add(lblAuthorDisplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 140, 30));
 
         lblQuantityDisplay.setFont(new java.awt.Font("Liberation Sans", 0, 20)); // NOI18N
         lblQuantityDisplay.setForeground(new java.awt.Color(0, 0, 0));
-        lblQuantityDisplay
-                .setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        lblQuantityDisplay.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         panelBookDetails.add(lblQuantityDisplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 500, 140, 30));
 
         lblBookIdDisplay.setFont(new java.awt.Font("Liberation Sans", 0, 20)); // NOI18N
         lblBookIdDisplay.setForeground(new java.awt.Color(0, 0, 0));
-        lblBookIdDisplay
-                .setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        lblBookIdDisplay.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         panelBookDetails.add(lblBookIdDisplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 140, 30));
 
         panel_Main.add(panelBookDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 865));
@@ -334,11 +332,9 @@ public class IssueBook extends javax.swing.JFrame {
 
         pnlBookDetails.setFont(new java.awt.Font("Liberation Sans", 1, 25)); // NOI18N
         pnlBookDetails.setForeground(new java.awt.Color(255, 255, 255));
-        pnlBookDetails.setIcon(new javax.swing.ImageIcon(
-                getClass().getResource("/AddNewBookIcons/icons8_Student_Registration_100px_2.png"))); // NOI18N
+        pnlBookDetails.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Student_Registration_100px_2.png"))); // NOI18N
         pnlBookDetails.setText("    Student Details");
-        pnlBookDetails
-                .setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 5, 0, new java.awt.Color(255, 255, 255)));
+        pnlBookDetails.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 5, 0, new java.awt.Color(255, 255, 255)));
         panelStudentDetails.add(pnlBookDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 350, -1));
 
         lblStudentId.setFont(new java.awt.Font("Liberation Sans", 0, 25)); // NOI18N
@@ -363,31 +359,23 @@ public class IssueBook extends javax.swing.JFrame {
 
         lblStudentIdDisplay.setFont(new java.awt.Font("Liberation Sans", 0, 20)); // NOI18N
         lblStudentIdDisplay.setForeground(new java.awt.Color(0, 0, 0));
-        lblStudentIdDisplay
-                .setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        panelStudentDetails.add(lblStudentIdDisplay,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 140, 30));
+        lblStudentIdDisplay.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        panelStudentDetails.add(lblStudentIdDisplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 140, 30));
 
         lblStudentNameDisplay.setFont(new java.awt.Font("Liberation Sans", 0, 20)); // NOI18N
         lblStudentNameDisplay.setForeground(new java.awt.Color(0, 0, 0));
-        lblStudentNameDisplay
-                .setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        panelStudentDetails.add(lblStudentNameDisplay,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 140, 30));
+        lblStudentNameDisplay.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        panelStudentDetails.add(lblStudentNameDisplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 140, 30));
 
         lblStudentAgeDisplay.setFont(new java.awt.Font("Liberation Sans", 0, 20)); // NOI18N
         lblStudentAgeDisplay.setForeground(new java.awt.Color(0, 0, 0));
-        lblStudentAgeDisplay
-                .setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        panelStudentDetails.add(lblStudentAgeDisplay,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, 140, 30));
+        lblStudentAgeDisplay.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        panelStudentDetails.add(lblStudentAgeDisplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, 140, 30));
 
         lblStudentGenderDisplay.setFont(new java.awt.Font("Liberation Sans", 0, 20)); // NOI18N
         lblStudentGenderDisplay.setForeground(new java.awt.Color(0, 0, 0));
-        lblStudentGenderDisplay
-                .setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        panelStudentDetails.add(lblStudentGenderDisplay,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 490, 140, 30));
+        lblStudentGenderDisplay.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        panelStudentDetails.add(lblStudentGenderDisplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 490, 140, 30));
 
         panel_Main.add(panelStudentDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, 500, 865));
 
@@ -484,6 +472,10 @@ public class IssueBook extends javax.swing.JFrame {
         });
         panel_Main.add(btbIssueBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 660, 240, -1));
 
+        lblValideIdStatus.setForeground(new java.awt.Color(204, 0, 0));
+        panel_Main.add(lblValideIdStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 200, 130, 30));
+        panel_Main.add(lblValBkStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 320, 140, 30));
+
         getContentPane().add(panel_Main, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1541, 865));
 
         setSize(new java.awt.Dimension(1541, 865));
@@ -533,16 +525,20 @@ public class IssueBook extends javax.swing.JFrame {
     private void txtFldStudentIdFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_txtFldStudentIdFocusLost
         if (txtFldStudentId.getText() != "" && txtFldStudentId.getText().matches("^[0-9]+$")) {
             getStudentDetails();
+            lblValideIdStatus.setText("");
         } else {
-            JOptionPane.showMessageDialog(this, "Invalid Student Id");
+            lblValideIdStatus.setForeground(Color.RED);
+            lblValideIdStatus.setText("Invalid Student Id");
         }
     }// GEN-LAST:event_txtFldStudentIdFocusLost
 
     private void txtFldBookIdFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_txtFldBookIdFocusLost
         if (txtFldBookId.getText() != "" && txtFldBookId.getText().matches("^[0-9]+$")) {
             getBookDetails();
+            lblValBkStatus.setText("");
         } else {
-            JOptionPane.showMessageDialog(this, "Invalid Book Id");
+            lblValBkStatus.setForeground(Color.RED);
+            lblValBkStatus.setText("Invalid Book Id");
         }
     }// GEN-LAST:event_txtFldBookIdFocusLost
 
@@ -602,6 +598,8 @@ public class IssueBook extends javax.swing.JFrame {
     private javax.swing.JLabel lblStudentIdDisplay;
     private javax.swing.JLabel lblStudentName;
     private javax.swing.JLabel lblStudentNameDisplay;
+    private javax.swing.JLabel lblValBkStatus;
+    private javax.swing.JLabel lblValideIdStatus;
     private javax.swing.JPanel panelBookDetails;
     private javax.swing.JPanel panelStudentDetails;
     private javax.swing.JPanel panel_Main;
