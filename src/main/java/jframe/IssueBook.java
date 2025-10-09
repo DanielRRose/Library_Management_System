@@ -114,6 +114,56 @@ public class IssueBook extends javax.swing.JFrame {
 
     }
 
+    public boolean hasQuantity() {
+
+        boolean Instock = false;
+
+        try {
+            int bookId = Integer.parseInt(lblBookIdDisplay.getText());
+            Connection conn = DBConnection.getConnection();
+            String sqlQuery = "SELECT * FROM library_ms.book_details WHERE book_id = ?";
+            PreparedStatement prepStmt = conn.prepareStatement(sqlQuery);
+            prepStmt.setInt(1, bookId);
+            ResultSet rs = prepStmt.executeQuery();
+            if (rs.next()) {
+                int quantity = Integer.parseInt(rs.getString("quantity"));
+                if (quantity > 0) {
+                    Instock = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Instock;
+    }
+
+    public boolean alreadyIssued() {
+
+        boolean isIssued = false;
+
+        try {
+
+            int bookId = Integer.parseInt(lblBookIdDisplay.getText());
+            int studentId = Integer.parseInt(lblStudentIdDisplay.getText());
+            Connection conn = DBConnection.getConnection();
+            String sqlQuery = "SELECT * FROM library_ms.issue_book_details WHERE student_id = ? and book_id = ? and state = ?";
+            PreparedStatement prepStatement = conn.prepareStatement(sqlQuery);
+            prepStatement.setInt(1, studentId);
+            prepStatement.setInt(2, bookId);
+            prepStatement.setString(3, "checked_out");
+
+            ResultSet rs = prepStatement.executeQuery();
+            if (rs.next()) {
+                isIssued = true;
+            } else {
+                isIssued = false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isIssued;
+    }
+
     public void getStudentDetails() {
 
         try {
@@ -463,12 +513,21 @@ public class IssueBook extends javax.swing.JFrame {
     }// GEN-LAST:event_txtFldIssueDateActionPerformed
 
     private void btbIssueBookActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btbIssueBookActionPerformed
-        if (issueBook()) {
-            JOptionPane.showMessageDialog(this, "Successfully Issued Book");
-            updateBookCount();
+        if (hasQuantity()) {
+            if (!alreadyIssued()) {
+                if (issueBook()) {
+                    JOptionPane.showMessageDialog(this, "Successfully Issued Book");
+                    updateBookCount();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to Issued Book");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Student already has book checked out!");
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Failed to Issued Book");
+            JOptionPane.showMessageDialog(this, "No Book Copies avaible, Stock less than 1");
         }
+
     }// GEN-LAST:event_btbIssueBookActionPerformed
 
     private void txtFldStudentIdFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_txtFldStudentIdFocusLost
