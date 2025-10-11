@@ -220,6 +220,9 @@ public class HomePage extends javax.swing.JFrame {
         lblReturnBookTxt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Sell_26px.png"))); // NOI18N
         lblReturnBookTxt.setText("    Return Book");
         lblReturnBookTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblReturnBookTxtMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblReturnBookTxtMouseEntered(evt);
             }
@@ -575,6 +578,12 @@ public class HomePage extends javax.swing.JFrame {
         issueBook.setVisible(true);
         dispose();
     }//GEN-LAST:event_lblIssueBookTxt1MouseClicked
+
+    private void lblReturnBookTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblReturnBookTxtMouseClicked
+        ReturnBook returnBook = new ReturnBook();
+        returnBook.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_lblReturnBookTxtMouseClicked
 
     
         private void lblManageBooksTxtMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lblManageBooksTxtMouseClicked

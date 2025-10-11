@@ -106,6 +106,39 @@ public class ReturnBook extends javax.swing.JFrame {
         }
     }
 
+
+    public boolean selectBookRecord(){
+        
+        boolean success = false;
+
+        try {
+            int bookId = Integer.parseInt(txtFldStudentId.getText());
+            int studentId = Integer.parseInt(txtFldStudentId.getText());
+            Connection conn = DBConnection.getConnection();
+            String sqlQuery = "SELECT * FROM library_ms.issue_book_details WHERE book_id = ? AND student_id = ?";
+            PreparedStatement prepStat = conn.prepareStatement(sqlQuery);
+            prepStat.setInt(1, bookId);
+            prepStat.setInt(2, studentId);
+            ResultSet rs = prepStat.executeQuery();
+
+            if (rs.next()) {
+                lblIssueIdDisplay.setText(rs.getString("id"));
+                lblBookIdDisplay.setText(rs.getString("book_id"));
+                lblBookNameDisplay.setText(rs.getString("book_name"));
+                lblStudentIdDisplay.setText(rs.getString("student_id"));
+                lblStudentNameDisplay.setText(rs.getString("student_name"));
+                lblIssueDateDisplay.setText(rs.getString("issue_date"));
+                lblDueDateDisplay.setText(rs.getString("due_date"));
+
+                success = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return success;
+    }
+
     public void refreshBookDetailTable() {
 
     }
@@ -271,7 +304,7 @@ public class ReturnBook extends javax.swing.JFrame {
         lblDueDateDisplay = new javax.swing.JLabel();
         lblBookIdDisplay = new javax.swing.JLabel();
         lblDueDate = new javax.swing.JLabel();
-        lblIssueDateDisplay1 = new javax.swing.JLabel();
+        lblIssueDateDisplay = new javax.swing.JLabel();
         lblIssueId = new javax.swing.JLabel();
         lblIssueIdDisplay = new javax.swing.JLabel();
         lblStudentId = new javax.swing.JLabel();
@@ -289,7 +322,7 @@ public class ReturnBook extends javax.swing.JFrame {
         btbReturnBook = new javax.swing.JButton();
         lblValideIdStatus = new javax.swing.JLabel();
         lblValBkStatus = new javax.swing.JLabel();
-        btbFindBooks = new javax.swing.JButton();
+        btbSelectBook = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -384,10 +417,10 @@ public class ReturnBook extends javax.swing.JFrame {
         lblDueDate.setText("Due Date:");
         panelBookDetails.add(lblDueDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 660, -1, -1));
 
-        lblIssueDateDisplay1.setFont(new java.awt.Font("Liberation Sans", 0, 20)); // NOI18N
-        lblIssueDateDisplay1.setForeground(new java.awt.Color(0, 0, 0));
-        lblIssueDateDisplay1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        panelBookDetails.add(lblIssueDateDisplay1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 590, 140, 30));
+        lblIssueDateDisplay.setFont(new java.awt.Font("Liberation Sans", 0, 20)); // NOI18N
+        lblIssueDateDisplay.setForeground(new java.awt.Color(0, 0, 0));
+        lblIssueDateDisplay.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        panelBookDetails.add(lblIssueDateDisplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 590, 140, 30));
 
         lblIssueId.setFont(new java.awt.Font("Liberation Sans", 0, 25)); // NOI18N
         lblIssueId.setForeground(new java.awt.Color(255, 255, 255));
@@ -445,7 +478,7 @@ public class ReturnBook extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Issue Id", "Book Id", "Student Id", "Book Name", "Issue Date", "Return Date"
+                "Issue Id", "Book Id", "Student Id", "Book Name", "Issue Date", "Due Date"
             }
         ) {
             Class[] types = new Class [] {
@@ -510,24 +543,19 @@ public class ReturnBook extends javax.swing.JFrame {
         panel_Main.add(txtFldBookId, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 470, 200, 30));
 
         btbReturnBook.setText("Return Book");
-        btbReturnBook.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                // btbReturnBookActionPerformed(evt);
-            }
-        });
         panel_Main.add(btbReturnBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 610, 240, -1));
 
         lblValideIdStatus.setForeground(new java.awt.Color(204, 0, 0));
         panel_Main.add(lblValideIdStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 200, 130, 30));
         panel_Main.add(lblValBkStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 320, 140, 30));
 
-        btbFindBooks.setText("Find Books");
-        btbFindBooks.addActionListener(new java.awt.event.ActionListener() {
+        btbSelectBook.setText("Select Record");
+        btbSelectBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btbFindBooksActionPerformed(evt);
+                btbSelectBookActionPerformed(evt);
             }
         });
-        panel_Main.add(btbFindBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 560, 240, -1));
+        panel_Main.add(btbSelectBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 560, 240, -1));
 
         getContentPane().add(panel_Main, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1541, 865));
 
@@ -535,9 +563,13 @@ public class ReturnBook extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btbFindBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbFindBooksActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btbFindBooksActionPerformed
+    private void btbSelectBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbSelectBookActionPerformed
+        if (selectBookRecord()) {
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Unable to get selected record");
+        }
+    }//GEN-LAST:event_btbSelectBookActionPerformed
 
     private void lblBack1MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lblBack1MouseClicked
         HomePage homePage = new HomePage();
@@ -630,8 +662,8 @@ public class ReturnBook extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPnlBack1;
-    private javax.swing.JButton btbFindBooks;
     private javax.swing.JButton btbReturnBook;
+    private javax.swing.JButton btbSelectBook;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -645,7 +677,7 @@ public class ReturnBook extends javax.swing.JFrame {
     private javax.swing.JLabel lblDueDate;
     private javax.swing.JLabel lblDueDateDisplay;
     private javax.swing.JLabel lblIssueDate;
-    private javax.swing.JLabel lblIssueDateDisplay1;
+    private javax.swing.JLabel lblIssueDateDisplay;
     private javax.swing.JLabel lblIssueId;
     private javax.swing.JLabel lblIssueIdDisplay;
     private javax.swing.JLabel lblStudentId;
