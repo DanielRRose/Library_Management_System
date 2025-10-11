@@ -4,6 +4,8 @@
 
 package com.mycompany.library_management_system;
 
+import jframe.LoginPage;
+
 /**
  *
  * @author daniel
@@ -11,6 +13,11 @@ package com.mycompany.library_management_system;
 public class Library_Management_System {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        runApp();
+    }
+
+    private static void runApp(){
+        LoginPage loginPage = new LoginPage();
+        loginPage.setVisible(true);
     }
 }

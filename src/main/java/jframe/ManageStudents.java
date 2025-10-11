@@ -68,7 +68,7 @@ public class ManageStudents extends javax.swing.JFrame {
         // Let TABLE auto_increment book_id
 
         if (validateFields()) {
-            if (recordExists() == false) {
+            // if (recordExists() == false) {
 
                 try {
                     Connection conn = DBConnection.getConnection();
@@ -94,9 +94,9 @@ public class ManageStudents extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(rootPane, "This Student Already Exists!");
             }
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Fields can not be empty");
-        }
+        // } else {
+        //     JOptionPane.showMessageDialog(rootPane, "Fields can not be empty");
+        // }
 
     }
 

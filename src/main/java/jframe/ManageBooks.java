@@ -72,7 +72,7 @@ public class ManageBooks extends javax.swing.JFrame {
         // auto_increment book_id
 
         if (validateBookFields()) {
-            if (recordExists() == false) {
+            // if (recordExists() == false) {
 
                 try {
                     Connection conn = DBConnection.getConnection();
@@ -98,9 +98,9 @@ public class ManageBooks extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(rootPane, "This Book Already Exists!");
             }
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Fields can not be empty");
-        }
+        // } else {
+        //     JOptionPane.showMessageDialog(rootPane, "Fields can not be empty");
+        // }
 
     }
 
