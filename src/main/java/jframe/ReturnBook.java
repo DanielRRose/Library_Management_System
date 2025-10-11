@@ -70,14 +70,13 @@ public class ReturnBook extends javax.swing.JFrame {
                 int studentId = rs.getInt("id");
                 String studentName = rs.getString("student_name");
 
-                Object[] obj = {studentId, studentName};
+                Object[] obj = { studentId, studentName };
                 model.addRow(obj);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
     public void setIssuedBooksToTable() {
 
@@ -98,7 +97,7 @@ public class ReturnBook extends javax.swing.JFrame {
                 String issueDate = rs.getDate("issue_date").toString();
                 String dueDate = rs.getDate("due_date").toString();
 
-                Object[] obj = { issueId, bookId, studentId, bookName, issueDate , dueDate };
+                Object[] obj = { issueId, bookId, studentId, bookName, issueDate, dueDate };
                 model.addRow(obj);
             }
         } catch (Exception e) {
@@ -106,9 +105,8 @@ public class ReturnBook extends javax.swing.JFrame {
         }
     }
 
+    public boolean selectBookRecord() {
 
-    public boolean selectBookRecord(){
-        
         boolean success = false;
 
         try {
@@ -139,47 +137,30 @@ public class ReturnBook extends javax.swing.JFrame {
         return success;
     }
 
-    public void refreshBookDetailTable() {
+    public boolean updateBooks() {
+
+        boolean isUpdated = false;
+        try {
+            int bookId = Integer.parseInt(lblBookIdDisplay.getText());
+            Connection conn = DBConnection.getConnection();
+            String sqlUpdate = "UPDATE library_ms.book_details SET quantity = quantity + 1 WHERE book_id = ?";
+            PreparedStatement prepStatment = conn.prepareStatement(sqlUpdate);
+            prepStatment.setInt(1, bookId);
+
+            int rowCount = prepStatment.executeUpdate();
+            if (rowCount > 0) {
+                isUpdated = true;
+                setIssuedBooksToTable();
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to Update Book quantity");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isUpdated;
 
     }
-
-//    public boolean issueBook() {
-//
-//        boolean result = false;
-//
-//        try {
-//            int bookId = Integer.parseInt(lblBookIdDisplay.getText());
-//            String bookName = lblBookNameDisplay.getText();
-//            int studentId = Integer.parseInt(lblStudentIdDisplay.getText());
-//            String studentName = lblStudentNameDisplay.getText();
-//            java.sql.Date issueDate = java.sql.Date.valueOf(txtFldIssueDate.getText());
-//            java.sql.Date dueDate = java.sql.Date.valueOf(txtFldDueDate.getText());
-//
-//            Connection conn = DBConnection.getConnection();
-//            String sqlInsert = """
-//                    INSERT INTO library_ms.issue_book_details (book_id, book_name, student_id, student_name, issue_date, due_date, state)
-//                    VALUES (?,?,?,?,?,?,?)
-//                    """;
-//            PreparedStatement prepStatement = conn.prepareStatement(sqlInsert);
-//            prepStatement.setInt(1, bookId);
-//            prepStatement.setString(2, bookName);
-//            prepStatement.setInt(3, studentId);
-//            prepStatement.setString(4, studentName);
-//            prepStatement.setDate(5, issueDate);
-//            prepStatement.setDate(6, dueDate);
-//            prepStatement.setString(7, "checked_out");
-//            int rowCount = prepStatement.executeUpdate();
-//
-//            if (rowCount > 0) {
-//                result = true;
-//            } else {
-//                result = false;
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return result;
-//    }
 
     // update the quantity in libray_ms.book_details
     public void updateBookCount() {
@@ -256,29 +237,27 @@ public class ReturnBook extends javax.swing.JFrame {
         return isIssued;
     }
 
-//    public void getStudentDetails() {
-//
-//        try {
-//            int studentId = Integer.parseInt(txtFldStudentId.getText());
-//
-//            Connection conn = DBConnection.getConnection();
-//            String sqlQuery = "SELECT * FROM library_ms.student_details WHERE id = %d"
-//                    .formatted(studentId);
-//            PreparedStatement prepStatement = conn.prepareStatement(sqlQuery);
-//            ResultSet rs = prepStatement.executeQuery();
-//
-//            while (rs.next()) {
-//                int id = rs.getInt(1);
-//                int age = rs.getInt(3);
-//                lblStudentIdDisplay.setText(Integer.toString(id));
-//                lblStudentNameDisplay.setText(rs.getString(2));
-//                lblStudentAgeDisplay.setText(Integer.toString(age));
-//                lblStudentGenderDisplay.setText(rs.getString(4));
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public boolean returnBook() {
+        boolean bookReturned = false;
+
+        try {
+            int id = Integer.parseInt(lblIssueIdDisplay.getText());
+            int book_id = Integer.parseInt(lblBookIdDisplay.getText());
+            Connection conn = DBConnection.getConnection();
+            String sqlDelete = "DELETE FROM library_ms.issue_book_details WHERE id = ? AND book_id = ?";
+            PreparedStatement prepStat = conn.prepareStatement(sqlDelete);
+            prepStat.setInt(1, id);
+            prepStat.setInt(2, book_id);
+            int rowCount = prepStat.executeUpdate();
+
+            if (rowCount > 0) {
+                bookReturned = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bookReturned;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -286,6 +265,7 @@ public class ReturnBook extends javax.swing.JFrame {
      * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -314,6 +294,8 @@ public class ReturnBook extends javax.swing.JFrame {
         tblStudents = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblIssuedBooks = new javax.swing.JTable();
+        lblStudentTableHeader = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtFldStudentId = new javax.swing.JTextField();
@@ -468,7 +450,7 @@ public class ReturnBook extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblStudents);
 
-        panelStudentDetails.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 670, 370));
+        panelStudentDetails.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 670, 330));
 
         tblIssuedBooks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -491,7 +473,17 @@ public class ReturnBook extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblIssuedBooks);
 
-        panelStudentDetails.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 670, -1));
+        panelStudentDetails.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 437, 670, 380));
+
+        lblStudentTableHeader.setFont(new java.awt.Font("Liberation Sans", 1, 25)); // NOI18N
+        lblStudentTableHeader.setForeground(new java.awt.Color(0, 0, 0));
+        lblStudentTableHeader.setText("Students");
+        panelStudentDetails.add(lblStudentTableHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Liberation Sans", 1, 25)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Issued Books");
+        panelStudentDetails.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 400, -1, -1));
 
         panel_Main.add(panelStudentDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, 690, 865));
 
@@ -543,6 +535,16 @@ public class ReturnBook extends javax.swing.JFrame {
         panel_Main.add(txtFldBookId, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 470, 200, 30));
 
         btbReturnBook.setText("Return Book");
+        btbReturnBook.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btbReturnBookMouseClicked(evt);
+            }
+        });
+        btbReturnBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btbReturnBookActionPerformed(evt);
+            }
+        });
         panel_Main.add(btbReturnBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 610, 240, -1));
 
         lblValideIdStatus.setForeground(new java.awt.Color(204, 0, 0));
@@ -563,13 +565,26 @@ public class ReturnBook extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btbSelectBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbSelectBookActionPerformed
+    private void btbSelectBookActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btbSelectBookActionPerformed
         if (selectBookRecord()) {
 
         } else {
             JOptionPane.showMessageDialog(this, "Unable to get selected record");
         }
-    }//GEN-LAST:event_btbSelectBookActionPerformed
+    }// GEN-LAST:event_btbSelectBookActionPerformed
+
+    private void btbReturnBookActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btbReturnBookActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_btbReturnBookActionPerformed
+
+    private void btbReturnBookMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_btbReturnBookMouseClicked
+        if (returnBook()) {
+            JOptionPane.showMessageDialog(this, "Book Returned");
+            updateBooks();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error! Unable to Return Book");
+        }
+    }// GEN-LAST:event_btbReturnBookMouseClicked
 
     private void lblBack1MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lblBack1MouseClicked
         HomePage homePage = new HomePage();
@@ -594,31 +609,33 @@ public class ReturnBook extends javax.swing.JFrame {
     }// GEN-LAST:event_txtFldIssueDateActionPerformed
 
     private void btbIssueBookActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btbIssueBookActionPerformed
-//        if (hasQuantity()) {
-//            if (!alreadyIssued()) {
-//                if (issueBook()) {
-//                    JOptionPane.showMessageDialog(this, "Successfully Issued Book");
-//                    updateBookCount();
-//                } else {
-//                    JOptionPane.showMessageDialog(this, "Failed to Issued Book");
-//                }
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Student already has book checked out!");
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(this, "No Book Copies avaible, Stock less than 1");
-//        }
+        // if (hasQuantity()) {
+        // if (!alreadyIssued()) {
+        // if (issueBook()) {
+        // JOptionPane.showMessageDialog(this, "Successfully Issued Book");
+        // updateBookCount();
+        // } else {
+        // JOptionPane.showMessageDialog(this, "Failed to Issued Book");
+        // }
+        // } else {
+        // JOptionPane.showMessageDialog(this, "Student already has book checked out!");
+        // }
+        // } else {
+        // JOptionPane.showMessageDialog(this, "No Book Copies avaible, Stock less than
+        // 1");
+        // }
 
     }// GEN-LAST:event_btbIssueBookActionPerformed
 
     private void txtFldStudentIdFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_txtFldStudentIdFocusLost
-//        if (txtFldStudentId.getText() != "" && txtFldStudentId.getText().matches("^[0-9]+$")) {
-//            getStudentDetails();
-//            lblValideIdStatus.setText("");
-//        } else {
-//            lblValideIdStatus.setForeground(Color.RED);
-//            lblValideIdStatus.setText("Invalid Student Id");
-//        }
+        // if (txtFldStudentId.getText() != "" &&
+        // txtFldStudentId.getText().matches("^[0-9]+$")) {
+        // getStudentDetails();
+        // lblValideIdStatus.setText("");
+        // } else {
+        // lblValideIdStatus.setForeground(Color.RED);
+        // lblValideIdStatus.setText("Invalid Student Id");
+        // }
     }// GEN-LAST:event_txtFldStudentIdFocusLost
 
     private void txtFldBookIdFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_txtFldBookIdFocusLost
@@ -667,6 +684,7 @@ public class ReturnBook extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBack1;
@@ -684,6 +702,7 @@ public class ReturnBook extends javax.swing.JFrame {
     private javax.swing.JLabel lblStudentIdDisplay;
     private javax.swing.JLabel lblStudentName;
     private javax.swing.JLabel lblStudentNameDisplay;
+    private javax.swing.JLabel lblStudentTableHeader;
     private javax.swing.JLabel lblValBkStatus;
     private javax.swing.JLabel lblValideIdStatus;
     private javax.swing.JPanel panelBookDetails;

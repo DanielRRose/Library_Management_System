@@ -374,7 +374,7 @@ public class ManageStudents extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(rSTableStudentDetails);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 760, 130));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 760, 540));
 
         JLblManageStudents.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
         JLblManageStudents.setForeground(new java.awt.Color(0, 0, 0));

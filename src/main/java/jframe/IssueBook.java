@@ -457,11 +457,11 @@ public class IssueBook extends javax.swing.JFrame {
         panel_Main.add(txtFldIssueDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 450, 200, 30));
 
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("DD/MM/YYYY Format");
+        jLabel6.setText("YYYY-MM-DD Format");
         panel_Main.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 430, 180, -1));
 
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("DD/MM/YYYY Format");
+        jLabel7.setText("YYYY-MM-DD Format");
         panel_Main.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 550, 180, -1));
 
         btbIssueBook.setText("Issue Book");
