@@ -40,13 +40,15 @@ public class IssueBook extends javax.swing.JFrame {
             PreparedStatement prepStatement = conn.prepareStatement(sqlQuery);
             ResultSet rs = prepStatement.executeQuery();
 
-            while (rs.next()) {
+            if (rs.next()) {
                 int id = rs.getInt(1);
                 lblBookIdDisplay.setText(Integer.toString(id));
                 lblBookNameDisplay.setText(rs.getString(2));
                 lblAuthorDisplay.setText(rs.getString(3));
                 lblQuantityDisplay.setText(rs.getString(4));
-            }
+           } else {
+            JOptionPane.showMessageDialog(this, "Error Book Not Found!");
+           }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -54,7 +56,6 @@ public class IssueBook extends javax.swing.JFrame {
 
     public boolean issueBook() {
 
-        boolean result = false;
 
         try {
             int bookId = Integer.parseInt(lblBookIdDisplay.getText());
@@ -79,15 +80,13 @@ public class IssueBook extends javax.swing.JFrame {
             prepStatement.setString(7, "checked_out");
             int rowCount = prepStatement.executeUpdate();
 
-            if (rowCount > 0) {
-                result = true;
-            } else {
-                result = false;
+            if (rowCount == 0) {
+                return false;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return result;
+        return true;
     }
 
     // update the quantity in libray_ms.book_details

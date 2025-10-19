@@ -7,6 +7,7 @@ package jframe;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JOptionPane;
@@ -88,7 +89,8 @@ public class ManageStudents extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "Unable to Add to Table");
                     }
 
-                } catch (Exception e) {
+                } catch (SQLException e) {
+                    // TODO: handle sql bad field data here
                     e.printStackTrace();
                 }
             } else {
@@ -124,7 +126,7 @@ public class ManageStudents extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "Update Successfull");
                     }
 
-                } catch (Exception e) {
+                } catch (SQLException e) {
                     e.printStackTrace();
                 }
             } else {
@@ -159,6 +161,7 @@ public class ManageStudents extends javax.swing.JFrame {
     // checks if student exists in TABLE library_ms.student_details using id
     public boolean recordExists() {
 
+        //TODO: On duplicate Key Ignore
         System.out.println("Attempting to Locate Record");
 
         try {
@@ -190,7 +193,8 @@ public class ManageStudents extends javax.swing.JFrame {
 
         // TODO: validate txtFieldStudentId, and txtFieldAge is int
         // TODO: validate txtFieldBookName, and txtFieldAuthorName is String
-
+        // TODO: change fields names to correct variable names
+        
         String[] studentDetailsArr = new String[4];
         String bookId = txtFieldStudentId.getText();
         String bookName = txtFieldStudentName.getText();

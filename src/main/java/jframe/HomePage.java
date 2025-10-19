@@ -38,7 +38,8 @@ public class HomePage extends javax.swing.JFrame {
         int studentNo = 0;
         try {
             Connection conn = DBConnection.getConnection();
-            String sqlQuery = "SELECT * FROM library_ms.student_details";
+            //TODO: Lookup count on sql
+            String sqlQuery = "SELECT Count(Id) FROM library_ms.student_details";
             PreparedStatement prepStmt = conn.prepareStatement(sqlQuery);
             ResultSet rs = prepStmt.executeQuery();
             while (rs.next()) {
