@@ -38,12 +38,14 @@ public class HomePage extends javax.swing.JFrame {
         int studentNo = 0;
         try {
             Connection conn = DBConnection.getConnection();
-            //TODO: Lookup count on sql
-            String sqlQuery = "SELECT Count(Id) FROM library_ms.student_details";
+
+            // Homework from Fred.
+            // Use mySQL COUNT() function to make studentNo count more efficient.
+            String sqlQuery = "SELECT COUNT(id) FROM library_ms.student_details";
             PreparedStatement prepStmt = conn.prepareStatement(sqlQuery);
             ResultSet rs = prepStmt.executeQuery();
-            while (rs.next()) {
-                studentNo++;
+            if (rs.next()) {
+                studentNo = rs.getInt("COUNT(id)");
             }
             lblNoStudetntsNum.setText(Integer.toString(studentNo));
         } catch (Exception e) {
@@ -53,14 +55,15 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     public static int getNoIssedBookCount() {
+        // TODO: Find the total number of books
         int issuedNo = 0;
         try {
             Connection conn = DBConnection.getConnection();
-            String sqlQuery = "SELECT * FROM library_ms.issue_book_details";
+            String sqlQuery = "SELECT COUNT(id) FROM library_ms.issue_book_details";
             PreparedStatement prepStmt = conn.prepareStatement(sqlQuery);
             ResultSet rs = prepStmt.executeQuery();
-            while (rs.next()) {
-                issuedNo++;
+            if (rs.next()) {
+                issuedNo = rs.getInt("COUNT(id)");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,21 +72,21 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     public void setNoIssuedBook() {
-        int issueCount = getNoIssedBookCount();
-        lblIssuedBooksNum.setText(Integer.toString(issueCount));
+        lblIssuedBooksNum.setText(
+                Integer.toString(getNoIssedBookCount()));
     }
 
     public void setNoBooks() {
+
         int totalBooks = 0;
         int issueCount = getNoIssedBookCount();
         try {
             Connection conn = DBConnection.getConnection();
-            String sqlQuery = "SELECT * FROM library_ms.book_details";
+            String sqlQuery = "SELECT SUM(quantity) AS total_quantity FROM library_ms.book_details";
             PreparedStatement prepStmt = conn.prepareStatement(sqlQuery);
             ResultSet rs = prepStmt.executeQuery();
-            while (rs.next()) {
-                int quanity = rs.getInt("quantity");
-                totalBooks += quanity;
+            if (rs.next()) {
+                totalBooks = rs.getInt("total_quantity");
             }
             totalBooks += issueCount;
             lblNoBooksNum.setText(Integer.toString(totalBooks));
@@ -155,7 +158,8 @@ public class HomePage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         JPnlHeader = new javax.swing.JPanel();
@@ -224,13 +228,11 @@ public class HomePage extends javax.swing.JFrame {
         javax.swing.GroupLayout JPnlHeaderSpacerLayout = new javax.swing.GroupLayout(JPnlHeaderSpacer);
         JPnlHeaderSpacer.setLayout(JPnlHeaderSpacerLayout);
         JPnlHeaderSpacerLayout.setHorizontalGroup(
-            JPnlHeaderSpacerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 5, Short.MAX_VALUE)
-        );
+                JPnlHeaderSpacerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 5, Short.MAX_VALUE));
         JPnlHeaderSpacerLayout.setVerticalGroup(
-            JPnlHeaderSpacerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
+                JPnlHeaderSpacerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 50, Short.MAX_VALUE));
 
         JPnlHeader.add(JPnlHeaderSpacer, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 5, 50));
 
@@ -279,7 +281,8 @@ public class HomePage extends javax.swing.JFrame {
 
         lblDashboard.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         lblDashboard.setForeground(new java.awt.Color(153, 153, 153));
-        lblDashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Library_26px_1.png"))); // NOI18N
+        lblDashboard
+                .setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Library_26px_1.png"))); // NOI18N
         lblDashboard.setText("    Dashboard");
         JPnlDashboard.add(lblDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
@@ -295,15 +298,18 @@ public class HomePage extends javax.swing.JFrame {
 
         lblManageBooksTxt.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         lblManageBooksTxt.setForeground(new java.awt.Color(153, 153, 153));
-        lblManageBooksTxt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Book_26px.png"))); // NOI18N
+        lblManageBooksTxt
+                .setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Book_26px.png"))); // NOI18N
         lblManageBooksTxt.setText("    Manage Books");
         lblManageBooksTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblManageBooksTxtMouseClicked(evt);
             }
+
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblManageBooksTxtMouseEntered(evt);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lblManageBooksTxtMouseExited(evt);
             }
@@ -317,15 +323,18 @@ public class HomePage extends javax.swing.JFrame {
 
         lblDashboard3.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         lblDashboard3.setForeground(new java.awt.Color(153, 153, 153));
-        lblDashboard3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Read_Online_26px.png"))); // NOI18N
+        lblDashboard3
+                .setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Read_Online_26px.png"))); // NOI18N
         lblDashboard3.setText("    Manage Students");
         lblDashboard3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblDashboard3MouseClicked(evt);
             }
+
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblDashboard3MouseEntered(evt);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lblDashboard3MouseExited(evt);
             }
@@ -345,9 +354,11 @@ public class HomePage extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblReturnBookTxtMouseClicked(evt);
             }
+
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblReturnBookTxtMouseEntered(evt);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lblReturnBookTxtMouseExited(evt);
             }
@@ -361,15 +372,18 @@ public class HomePage extends javax.swing.JFrame {
 
         lblIssueBookTxt1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         lblIssueBookTxt1.setForeground(new java.awt.Color(153, 153, 153));
-        lblIssueBookTxt1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Return_Purchase_26px.png"))); // NOI18N
+        lblIssueBookTxt1.setIcon(
+                new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Return_Purchase_26px.png"))); // NOI18N
         lblIssueBookTxt1.setText("    Issue Book");
         lblIssueBookTxt1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblIssueBookTxt1MouseClicked(evt);
             }
+
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblIssueBookTxt1MouseEntered(evt);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lblIssueBookTxt1MouseExited(evt);
             }
@@ -383,12 +397,14 @@ public class HomePage extends javax.swing.JFrame {
 
         lblViewRecordsTxt.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         lblViewRecordsTxt.setForeground(new java.awt.Color(153, 153, 153));
-        lblViewRecordsTxt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_View_Details_26px.png"))); // NOI18N
+        lblViewRecordsTxt
+                .setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_View_Details_26px.png"))); // NOI18N
         lblViewRecordsTxt.setText("    View Records");
         lblViewRecordsTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblViewRecordsTxtMouseEntered(evt);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lblViewRecordsTxtMouseExited(evt);
             }
@@ -402,17 +418,20 @@ public class HomePage extends javax.swing.JFrame {
 
         lblViewIssuedBooksTxt.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         lblViewIssuedBooksTxt.setForeground(new java.awt.Color(153, 153, 153));
-        lblViewIssuedBooksTxt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Books_26px.png"))); // NOI18N
+        lblViewIssuedBooksTxt
+                .setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Books_26px.png"))); // NOI18N
         lblViewIssuedBooksTxt.setText("    View Issued Books");
         lblViewIssuedBooksTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblViewIssuedBooksTxtMouseEntered(evt);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lblViewIssuedBooksTxtMouseExited(evt);
             }
         });
-        JPnlViewIssuedBook.add(lblViewIssuedBooksTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+        JPnlViewIssuedBook.add(lblViewIssuedBooksTxt,
+                new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
         JPnlSideBar.add(JPnlViewIssuedBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 340, 60));
 
@@ -421,12 +440,14 @@ public class HomePage extends javax.swing.JFrame {
 
         lblDefaultListTxt.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         lblDefaultListTxt.setForeground(new java.awt.Color(153, 153, 153));
-        lblDefaultListTxt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Conference_26px.png"))); // NOI18N
+        lblDefaultListTxt
+                .setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Conference_26px.png"))); // NOI18N
         lblDefaultListTxt.setText("    Default List");
         lblDefaultListTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblDefaultListTxtMouseEntered(evt);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lblDefaultListTxtMouseExited(evt);
             }
@@ -457,30 +478,30 @@ public class HomePage extends javax.swing.JFrame {
         JPnlDetailSection.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         JPnlNoStudents.setBackground(new java.awt.Color(204, 204, 204));
-        JPnlNoStudents.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(0, 153, 153)));
+        JPnlNoStudents
+                .setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(0, 153, 153)));
 
         lblNoStudetntsNum.setBackground(new java.awt.Color(102, 102, 102));
         lblNoStudetntsNum.setFont(new java.awt.Font("Liberation Sans", 1, 50)); // NOI18N
         lblNoStudetntsNum.setForeground(new java.awt.Color(102, 102, 102));
-        lblNoStudetntsNum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_People_50px.png"))); // NOI18N
+        lblNoStudetntsNum
+                .setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_People_50px.png"))); // NOI18N
         lblNoStudetntsNum.setText("100");
 
         javax.swing.GroupLayout JPnlNoStudentsLayout = new javax.swing.GroupLayout(JPnlNoStudents);
         JPnlNoStudents.setLayout(JPnlNoStudentsLayout);
         JPnlNoStudentsLayout.setHorizontalGroup(
-            JPnlNoStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPnlNoStudentsLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(lblNoStudetntsNum)
-                .addContainerGap(66, Short.MAX_VALUE))
-        );
+                JPnlNoStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(JPnlNoStudentsLayout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addComponent(lblNoStudetntsNum)
+                                .addContainerGap(66, Short.MAX_VALUE)));
         JPnlNoStudentsLayout.setVerticalGroup(
-            JPnlNoStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPnlNoStudentsLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(lblNoStudetntsNum)
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
+                JPnlNoStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(JPnlNoStudentsLayout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(lblNoStudetntsNum)
+                                .addContainerGap(33, Short.MAX_VALUE)));
 
         JPnlDetailSection.add(JPnlNoStudents, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 260, 140));
 
@@ -495,30 +516,30 @@ public class HomePage extends javax.swing.JFrame {
         JPnlDetailSection.add(lblNoBooksTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, -1, -1));
 
         JPnlNoBooks.setBackground(new java.awt.Color(204, 204, 204));
-        JPnlNoBooks.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(102, 102, 255)));
+        JPnlNoBooks
+                .setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(102, 102, 255)));
 
         lblNoBooksNum.setBackground(new java.awt.Color(102, 102, 102));
         lblNoBooksNum.setFont(new java.awt.Font("Liberation Sans", 1, 50)); // NOI18N
         lblNoBooksNum.setForeground(new java.awt.Color(102, 102, 102));
-        lblNoBooksNum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Book_Shelf_50px.png"))); // NOI18N
+        lblNoBooksNum
+                .setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Book_Shelf_50px.png"))); // NOI18N
         lblNoBooksNum.setText("100");
 
         javax.swing.GroupLayout JPnlNoBooksLayout = new javax.swing.GroupLayout(JPnlNoBooks);
         JPnlNoBooks.setLayout(JPnlNoBooksLayout);
         JPnlNoBooksLayout.setHorizontalGroup(
-            JPnlNoBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPnlNoBooksLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(lblNoBooksNum)
-                .addContainerGap(66, Short.MAX_VALUE))
-        );
+                JPnlNoBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(JPnlNoBooksLayout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addComponent(lblNoBooksNum)
+                                .addContainerGap(66, Short.MAX_VALUE)));
         JPnlNoBooksLayout.setVerticalGroup(
-            JPnlNoBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPnlNoBooksLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(lblNoBooksNum)
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
+                JPnlNoBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(JPnlNoBooksLayout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(lblNoBooksNum)
+                                .addContainerGap(33, Short.MAX_VALUE)));
 
         JPnlDetailSection.add(JPnlNoBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 260, 140));
 
@@ -528,30 +549,30 @@ public class HomePage extends javax.swing.JFrame {
         JPnlDetailSection.add(lblIssuedBooksTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, -1, -1));
 
         JPnlIssuedBooks.setBackground(new java.awt.Color(204, 204, 204));
-        JPnlIssuedBooks.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(0, 153, 153)));
+        JPnlIssuedBooks
+                .setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(0, 153, 153)));
 
         lblIssuedBooksNum.setBackground(new java.awt.Color(102, 102, 102));
         lblIssuedBooksNum.setFont(new java.awt.Font("Liberation Sans", 1, 50)); // NOI18N
         lblIssuedBooksNum.setForeground(new java.awt.Color(102, 102, 102));
-        lblIssuedBooksNum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Sell_50px.png"))); // NOI18N
+        lblIssuedBooksNum
+                .setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_Sell_50px.png"))); // NOI18N
         lblIssuedBooksNum.setText("100");
 
         javax.swing.GroupLayout JPnlIssuedBooksLayout = new javax.swing.GroupLayout(JPnlIssuedBooks);
         JPnlIssuedBooks.setLayout(JPnlIssuedBooksLayout);
         JPnlIssuedBooksLayout.setHorizontalGroup(
-            JPnlIssuedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPnlIssuedBooksLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(lblIssuedBooksNum)
-                .addContainerGap(66, Short.MAX_VALUE))
-        );
+                JPnlIssuedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(JPnlIssuedBooksLayout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addComponent(lblIssuedBooksNum)
+                                .addContainerGap(66, Short.MAX_VALUE)));
         JPnlIssuedBooksLayout.setVerticalGroup(
-            JPnlIssuedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPnlIssuedBooksLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(lblIssuedBooksNum)
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
+                JPnlIssuedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(JPnlIssuedBooksLayout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(lblIssuedBooksNum)
+                                .addContainerGap(33, Short.MAX_VALUE)));
 
         JPnlDetailSection.add(JPnlIssuedBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 50, 260, 140));
 
@@ -561,62 +582,63 @@ public class HomePage extends javax.swing.JFrame {
         JPnlDetailSection.add(lblNoStudentsTxt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 20, -1, -1));
 
         JPnlNoStudents3.setBackground(new java.awt.Color(204, 204, 204));
-        JPnlNoStudents3.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(102, 102, 255)));
+        JPnlNoStudents3
+                .setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(102, 102, 255)));
 
         lblNoStudetntsNum3.setBackground(new java.awt.Color(102, 102, 102));
         lblNoStudetntsNum3.setFont(new java.awt.Font("Liberation Sans", 1, 50)); // NOI18N
         lblNoStudetntsNum3.setForeground(new java.awt.Color(102, 102, 102));
-        lblNoStudetntsNum3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_List_of_Thumbnails_50px.png"))); // NOI18N
+        lblNoStudetntsNum3.setIcon(
+                new javax.swing.ImageIcon(getClass().getResource("/adminIcons/icons8_List_of_Thumbnails_50px.png"))); // NOI18N
         lblNoStudetntsNum3.setText("100");
 
         javax.swing.GroupLayout JPnlNoStudents3Layout = new javax.swing.GroupLayout(JPnlNoStudents3);
         JPnlNoStudents3.setLayout(JPnlNoStudents3Layout);
         JPnlNoStudents3Layout.setHorizontalGroup(
-            JPnlNoStudents3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPnlNoStudents3Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(lblNoStudetntsNum3)
-                .addContainerGap(66, Short.MAX_VALUE))
-        );
+                JPnlNoStudents3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(JPnlNoStudents3Layout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addComponent(lblNoStudetntsNum3)
+                                .addContainerGap(66, Short.MAX_VALUE)));
         JPnlNoStudents3Layout.setVerticalGroup(
-            JPnlNoStudents3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPnlNoStudents3Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(lblNoStudetntsNum3)
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
+                JPnlNoStudents3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(JPnlNoStudents3Layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(lblNoStudetntsNum3)
+                                .addContainerGap(33, Short.MAX_VALUE)));
 
         JPnlDetailSection.add(JPnlNoStudents3, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 50, 260, 140));
 
         lblStudentDetailsHeader.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         lblStudentDetailsHeader.setForeground(new java.awt.Color(0, 0, 0));
         lblStudentDetailsHeader.setText("Student Details");
-        JPnlDetailSection.add(lblStudentDetailsHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
+        JPnlDetailSection.add(lblStudentDetailsHeader,
+                new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
 
         rSTableStudentDetails.setBackground(new java.awt.Color(204, 204, 204));
         rSTableStudentDetails.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Student Id", "Name", "Age", "Gender"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+                new Object[][] {
+                        { null, null, null, null },
+                        { null, null, null, null },
+                        { null, null, null, null },
+                        { null, null, null, null }
+                },
+                new String[] {
+                        "Student Id", "Name", "Age", "Gender"
+                }) {
+            Class[] types = new Class[] {
+                    java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
         });
         rSTableStudentDetails.setRowHeight(25);
         jScrollPaneStudentDetails.setViewportView(rSTableStudentDetails);
 
-        JPnlDetailSection.add(jScrollPaneStudentDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 550, 150));
+        JPnlDetailSection.add(jScrollPaneStudentDetails,
+                new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 550, 150));
 
         lblBookDetailsHeader.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         lblBookDetailsHeader.setForeground(new java.awt.Color(0, 0, 0));
@@ -625,28 +647,28 @@ public class HomePage extends javax.swing.JFrame {
 
         rSTableBookDetails.setBackground(new java.awt.Color(204, 204, 204));
         rSTableBookDetails.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Book Id", "Title", "Author", "Quantity"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                new Object[][] {
+                        { null, null, null, null },
+                        { null, null, null, null },
+                        { null, null, null, null },
+                        { null, null, null, null }
+                },
+                new String[] {
+                        "Book Id", "Title", "Author", "Quantity"
+                }) {
+            Class[] types = new Class[] {
+                    java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
         });
         rSTableBookDetails.setRowHeight(25);
         jScrollPaneBookDetails.setViewportView(rSTableBookDetails);
 
-        JPnlDetailSection.add(jScrollPaneBookDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 550, 150));
+        JPnlDetailSection.add(jScrollPaneBookDetails,
+                new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 550, 150));
 
         getContentPane().add(JPnlDetailSection, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 1200, 760));
 
