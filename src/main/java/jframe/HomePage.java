@@ -55,7 +55,6 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     public static int getNoIssedBookCount() {
-        // TODO: Find the total number of books
         int issuedNo = 0;
         try {
             Connection conn = DBConnection.getConnection();
@@ -78,15 +77,18 @@ public class HomePage extends javax.swing.JFrame {
 
     public void setNoBooks() {
 
+
+        // Homework from Fred.
+        // Used mySQL SUM() function to get to total current_quantity from book.details
         int totalBooks = 0;
         int issueCount = getNoIssedBookCount();
         try {
             Connection conn = DBConnection.getConnection();
-            String sqlQuery = "SELECT SUM(quantity) AS total_quantity FROM library_ms.book_details";
+            String sqlQuery = "SELECT SUM(quantity) AS current_quantity FROM library_ms.book_details";
             PreparedStatement prepStmt = conn.prepareStatement(sqlQuery);
             ResultSet rs = prepStmt.executeQuery();
             if (rs.next()) {
-                totalBooks = rs.getInt("total_quantity");
+                totalBooks = rs.getInt("current_quantity");
             }
             totalBooks += issueCount;
             lblNoBooksNum.setText(Integer.toString(totalBooks));
